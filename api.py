@@ -20,7 +20,11 @@ def random_account():
         # Memisahkan username dan password
         if ":" in random_account:
             username, password = random_account.split(":", 1)
-            return jsonify({"username": username, "password": password}), 200
+            return jsonify({
+                "username": username,
+                "password": password,
+                "combo": random_account
+            }), 200
         else:
             return jsonify({"error": "Invalid account format"}), 400
     except Exception as e:
