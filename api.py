@@ -21,8 +21,7 @@ def random_account():
         if ":" in random_account:
             username, password = random_account.split(":", 1)
             return jsonify({
-                "username": username,
-                "password": password,
+           
                 "combo": random_account
             }), 200
         else:
