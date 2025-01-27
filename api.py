@@ -3,11 +3,11 @@ import random
 
 app = Flask(__name__)
 
-@app.route('/api/gen-rblx', methods=['GET'])
+@app.route('/api/Roblox', methods=['GET'])
 def random_account():
     try:
         # Membaca file acc.txt
-        with open('acc.txt', 'r') as file:
+        with open('accrblx.txt', 'r') as file:
             accounts = file.readlines()
         
         # Memastikan file tidak kosong
