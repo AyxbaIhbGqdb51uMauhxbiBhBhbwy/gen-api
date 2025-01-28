@@ -65,7 +65,7 @@ def random_wwe_account():
 def random_microsoft_account():
     return jsonify(*get_random_account('accmicrosoft.txt'))
 
-@app.route('/api/C0rnHub', methods=['GET'])
+@app.route('/api/CornHub', methods=['GET'])
 def random_cornhub_account():
     return jsonify(*get_random_account('acccornhub.txt'))
 
@@ -81,7 +81,7 @@ def random_onlyfans_account():
 def random_fortnite_account():
     return jsonify(*get_random_account('accfortnite.txt'))
 
-@app.route('/api/DisneyPlus', methods=['GET'])
+@app.route('/api/Disney', methods=['GET'])
 def random_disneyplus_account():
     return jsonify(*get_random_account('accdisneyplus.txt'))
 
