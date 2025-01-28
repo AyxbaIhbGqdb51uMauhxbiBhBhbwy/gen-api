@@ -3,59 +3,87 @@ import random
 
 app = Flask(__name__)
 
-@app.route('/api/Roblox', methods=['GET'])
-def random_roblox_account():
+def get_random_account(filename):
     try:
-        # Membaca file acc.txt
-        with open('accrblx.txt', 'r') as file:
+        # Membaca file
+        with open(filename, 'r') as file:
             accounts = file.readlines()
-        
+
         # Memastikan file tidak kosong
         if not accounts:
-            return jsonify({"error": "No accounts found"}), 404
-        
+            return {"error": "No accounts found"}, 404
+
         # Memilih satu baris acak
         random_account = random.choice(accounts).strip()
-        
+
         # Memisahkan username dan password
         if ":" in random_account:
             username, password = random_account.split(":", 1)
-            return jsonify({
+            return {
                 "username": username,
                 "password": password,
                 "combo": random_account
-            }), 200
+            }, 200
         else:
-            return jsonify({"error": "Invalid account format"}), 400
+            return {"error": "Invalid account format"}, 400
     except Exception as e:
-        return jsonify({"error": str(e)}), 500
+        return {"error": str(e)}, 500
+
+@app.route('/api/Roblox', methods=['GET'])
+def random_roblox_account():
+    return jsonify(*get_random_account('accrblx.txt'))
 
 @app.route('/api/Steam', methods=['GET'])
 def random_steam_account():
-    try:
-        # Membaca file acc.txt
-        with open('accsteam.txt', 'r') as file:
-            accounts = file.readlines()
-        
-        # Memastikan file tidak kosong
-        if not accounts:
-            return jsonify({"error": "No accounts found"}), 404
-        
-        # Memilih satu baris acak
-        random_account = random.choice(accounts).strip()
-        
-        # Memisahkan username dan password
-        if ":" in random_account:
-            username, password = random_account.split(":", 1)
-            return jsonify({
-                "username": username,
-                "password": password,
-                "combo": random_account
-            }), 200
-        else:
-            return jsonify({"error": "Invalid account format"}), 400
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
+    return jsonify(*get_random_account('accsteam.txt'))
+
+@app.route('/api/Crunchyroll', methods=['GET'])
+def random_crunchyroll_account():
+    return jsonify(*get_random_account('acccrunchyroll.txt'))
+
+@app.route('/api/Netflix', methods=['GET'])
+def random_netflix_account():
+    return jsonify(*get_random_account('accnetflix.txt'))
+
+@app.route('/api/EpicGames', methods=['GET'])
+def random_epicgames_account():
+    return jsonify(*get_random_account('accepicgames.txt'))
+
+@app.route('/api/Valorant', methods=['GET'])
+def random_valorant_account():
+    return jsonify(*get_random_account('accvalorant.txt'))
+
+@app.route('/api/Tiktok', methods=['GET'])
+def random_tiktok_account():
+    return jsonify(*get_random_account('acctiktok.txt'))
+
+@app.route('/api/WWE', methods=['GET'])
+def random_wwe_account():
+    return jsonify(*get_random_account('accwwe.txt'))
+
+@app.route('/api/Microsoft', methods=['GET'])
+def random_microsoft_account():
+    return jsonify(*get_random_account('accmicrosoft.txt'))
+
+@app.route('/api/C0rnHub', methods=['GET'])
+def random_cornhub_account():
+    return jsonify(*get_random_account('acccornhub.txt'))
+
+@app.route('/api/NordVpn', methods=['GET'])
+def random_nordvpn_account():
+    return jsonify(*get_random_account('accnordvpn.txt'))
+
+@app.route('/api/OnlyFans', methods=['GET'])
+def random_onlyfans_account():
+    return jsonify(*get_random_account('acconlyfans.txt'))
+
+@app.route('/api/Fortnite', methods=['GET'])
+def random_fortnite_account():
+    return jsonify(*get_random_account('accfortnite.txt'))
+
+@app.route('/api/DisneyPlus', methods=['GET'])
+def random_disneyplus_account():
+    return jsonify(*get_random_account('accdisneyplus.txt'))
 
 if __name__ == '__main__':
     app.run(debug=True)
