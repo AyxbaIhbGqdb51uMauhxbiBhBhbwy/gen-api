@@ -4,7 +4,7 @@ import random
 app = Flask(__name__)
 
 @app.route('/api/Roblox', methods=['GET'])
-def random_account():
+def random_roblox_account():
     try:
         # Membaca file acc.txt
         with open('accrblx.txt', 'r') as file:
@@ -21,7 +21,7 @@ def random_account():
         if ":" in random_account:
             username, password = random_account.split(":", 1)
             return jsonify({
-                           "username": username,
+                "username": username,
                 "password": password,
                 "combo": random_account
             }), 200
@@ -31,7 +31,7 @@ def random_account():
         return jsonify({"error": str(e)}), 500
 
 @app.route('/api/Steam', methods=['GET'])
-def random_account():
+def random_steam_account():
     try:
         # Membaca file acc.txt
         with open('accsteam.txt', 'r') as file:
@@ -48,7 +48,7 @@ def random_account():
         if ":" in random_account:
             username, password = random_account.split(":", 1)
             return jsonify({
-                           "username": username,
+                "username": username,
                 "password": password,
                 "combo": random_account
             }), 200
@@ -56,3 +56,6 @@ def random_account():
             return jsonify({"error": "Invalid account format"}), 400
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+if __name__ == '__main__':
+    app.run(debug=True)
