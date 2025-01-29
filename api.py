@@ -45,27 +45,15 @@ def random_crunchyroll_account():
 def random_netflix_account():
     return jsonify(*get_random_account('accnetflix.txt'))
 
-@app.route('/api/EpicGames', methods=['GET'])
-def random_epicgames_account():
-    return jsonify(*get_random_account('accepicgames.txt'))
 
 @app.route('/api/Valorant', methods=['GET'])
 def random_valorant_account():
     return jsonify(*get_random_account('accvalorant.txt'))
 
-@app.route('/api/Tiktok', methods=['GET'])
-def random_tiktok_account():
-    return jsonify(*get_random_account('acctiktok.txt'))
 
-@app.route('/api/WWE', methods=['GET'])
-def random_wwe_account():
-    return jsonify(*get_random_account('accwwe.txt'))
+ 
 
-@app.route('/api/Microsoft', methods=['GET'])
-def random_microsoft_account():
-    return jsonify(*get_random_account('accmicrosoft.txt'))
-
-@app.route('/api/CornHub', methods=['GET'])
+@app.route('/api/PornHub', methods=['GET'])
 def random_cornhub_account():
     return jsonify(*get_random_account('acccornhub.txt'))
 
@@ -73,9 +61,6 @@ def random_cornhub_account():
 def random_nordvpn_account():
     return jsonify(*get_random_account('accnordvpn.txt'))
 
-@app.route('/api/OnlyFans', methods=['GET'])
-def random_onlyfans_account():
-    return jsonify(*get_random_account('acconlyfans.txt'))
 
 @app.route('/api/Fortnite', methods=['GET'])
 def random_fortnite_account():
