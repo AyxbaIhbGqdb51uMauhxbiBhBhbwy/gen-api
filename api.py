@@ -53,9 +53,6 @@ def random_valorant_account():
 
  
 
-@app.route('/api/PornHub', methods=['GET'])
-def random_cornhub_account():
-    return jsonify(*get_random_account('acccornhub.txt'))
 
 @app.route('/api/NordVpn', methods=['GET'])
 def random_nordvpn_account():
