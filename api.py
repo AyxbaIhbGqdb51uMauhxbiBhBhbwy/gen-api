@@ -1,71 +1,58 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 import random
 
 app = Flask(__name__)
 
+# Daftar API key yang valid
+VALID_API_KEYS = {
+    "nsnseuhusdjcneusbbeuuisefb-OWNERONLY": "never off",
+    "oCz5ODELLOIzD3dgbIMnoy3-jova3435": "never off"
+}
+
 def get_random_account(filename):
     try:
-        # Membaca file
         with open(filename, 'r') as file:
             accounts = file.readlines()
-
-        # Memastikan file tidak kosong
         if not accounts:
-            return {"error": "No accounts found"}, 404
-
-        # Memilih satu baris acak
+            return {"error": "No accounts found"}
         random_account = random.choice(accounts).strip()
-
-        # Memisahkan username dan password
         if ":" in random_account:
             username, password = random_account.split(":", 1)
             return {
+                "combo": f"{username}:{password}",
                 "username": username,
-                "password": password,
-                "combo": random_account
-            }, 200
+                "password": password
+            }
         else:
-            return {"error": "Invalid account format"}, 400
+            return {"error": "Invalid account format"}
     except Exception as e:
-        return {"error": str(e)}, 500
+        return {"error": str(e)}
 
-@app.route('/api/Roblox', methods=['GET'])
-def random_roblox_account():
-    return jsonify(*get_random_account('accrblx.txt'))
+@app.route('/api/<service>', methods=['GET'])
+def random_account(service):
+    # Ambil API key dari query parameter atau header
+    api_key = request.args.get("apikey") or request.headers.get("x-api-key")
 
-@app.route('/api/Steam', methods=['GET'])
-def random_steam_account():
-    return jsonify(*get_random_account('accsteam.txt'))
+    if not api_key or api_key not in VALID_API_KEYS:
+        return jsonify({"error": "Invalid API key"})
 
-@app.route('/api/Crunchyroll', methods=['GET'])
-def random_crunchyroll_account():
-    return jsonify(*get_random_account('acccrunchyroll.txt'))
+    # Peta layanan ke nama file
+    file_map = {
+        "Roblox": "accrblx.txt",
+        "Steam": "accsteam.txt",
+        "Crunchyroll": "acccrunchyroll.txt",
+        "Netflix": "accnetflix.txt",
+        "Valorant": "accvalorant.txt",
+        "NordVpn": "accnordvpn.txt",
+        "Fortnite": "accfortnite.txt",
+        "Disney": "accdisneyplus.txt"
+    }
 
-@app.route('/api/Netflix', methods=['GET'])
-def random_netflix_account():
-    return jsonify(*get_random_account('accnetflix.txt'))
+    # Cek apakah layanan tersedia
+    if service not in file_map:
+        return jsonify({"error": "Service not found"})
 
-
-@app.route('/api/Valorant', methods=['GET'])
-def random_valorant_account():
-    return jsonify(*get_random_account('accvalorant.txt'))
-
-
- 
-
-
-@app.route('/api/NordVpn', methods=['GET'])
-def random_nordvpn_account():
-    return jsonify(*get_random_account('accnordvpn.txt'))
-
-
-@app.route('/api/Fortnite', methods=['GET'])
-def random_fortnite_account():
-    return jsonify(*get_random_account('accfortnite.txt'))
-
-@app.route('/api/Disney', methods=['GET'])
-def random_disneyplus_account():
-    return jsonify(*get_random_account('accdisneyplus.txt'))
+    return jsonify(get_random_account(file_map[service]))
 
 if __name__ == '__main__':
     app.run(debug=True)
