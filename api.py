@@ -21,7 +21,8 @@ def get_random_account(filename):
             return {
                 "combo": f"{username}:{password}",
                 "username": username,
-                "password": password
+                "password": password,
+                "Service": "Roblox, Steam, Valorant, NordVpn, Netflix, Disney+, Crunchyroll."
             }
         else:
             return {"error": "Invalid account format"}
