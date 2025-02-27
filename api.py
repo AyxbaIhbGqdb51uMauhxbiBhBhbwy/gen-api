@@ -31,7 +31,15 @@ def get_random_accounts(filename, bulk=1):
         bulk = min(bulk, len(accounts))  # Pastikan tidak melebihi jumlah akun tersedia
         selected_accounts = random.sample(accounts, bulk)
         
-        return [{"combo": acc, "username": acc.split(":", 1)[0], "password": acc.split(":", 1)[1]} for acc in selected_accounts]
+        if bulk == 1:
+            username, password = selected_accounts[0].split(":", 1)
+            return {
+                "combo": f"{username}:{password}",
+                "username": username,
+                "password": password
+            }
+        else:
+            return {"combo": selected_accounts}
     except Exception as e:
         return {"error": str(e)}
 
