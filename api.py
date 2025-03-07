@@ -6,7 +6,7 @@ app = Flask(__name__)
 # Daftar API key yang valid
 VALID_API_KEYS = {
     "nsnseuhusdjcneusbbeuuisefb-OWNERONLY": "never off",
-    "qoyidicksuckernogay": "never off",
+    "qoyiapikeyleakerfrfr": "never off",
     "oCz5ODELLOIzD3dgbIMnoy3-jova3435": "never off"
 }
 
